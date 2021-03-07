@@ -12,17 +12,10 @@ public class HotelReservationTest<result> {
       @Test
       public void givenHotel_ShouldReturnTrue() {
           HotelReservation hotelReservation = new HotelReservation();
-          Hotel hotel = new Hotel("LakeWood",100);
+          Hotel hotel = new Hotel("Lakewood",110);
+          hotelReservation.addHotel(hotel);
           List hotelList = hotelReservation.getHotelList();
+          System.out.println(hotelList);
           Assertions.assertTrue(hotelList.contains(hotel));
       }
-
-    @Test
-    public void givenNoOfDays_ShouldReturnCheapestHotel() {
-        HotelReservation hotelReservation = new HotelReservation();
-        Hotel hotel = new Hotel("LakeWood",100);
-        List hotelList = hotelReservation.getHotelList();
-        String expectedResult = "LakeWood";
-        Assertions.assertTrue(hotelList.contains(hotel));
-    }
 }

@@ -7,8 +7,7 @@ public class Hotel {
     public String hotelName;
     public int weekDayRates;
     public int weekEndRates;
-    public static String startDate;
-    public static String endDate;
+    public int rates;
     public Scanner sc = new Scanner(System.in);
 
     public Hotel(String hotelName, int weekDayRates) {
@@ -39,22 +38,17 @@ public class Hotel {
         this.weekEndRates = weekEndRates;
     }
 
-//    public int getRate(){
-//        return rates;
-//    }
-//    public void setRate(int rates){
-//        this.rates = rates;
-//    }
+    public int getRate(){
+        return rates;
+    }
+    public void setRate(int rates){
+        this.rates = rates;
+    }
 
     @Override
     public String toString() {
         String hotel = "Hotel : " + this.getHotelName() +"\nWeekDayRate : " +this.getWeekDayRates();
         return hotel;
-    }
-
-    public void getDate(String startDate, String endDate){
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public void add(String lakeWood, int i) {
