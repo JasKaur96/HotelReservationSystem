@@ -1,5 +1,11 @@
 package com.hotelresservation;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HotelReservation {
     public static Scanner sc = new Scanner(System.in);
@@ -9,7 +15,7 @@ public class HotelReservation {
     public void addHotel(Hotel hotel){
         hotelList.add(hotel);
     }
-    //get hotel details.
+
     public void getHotelDetails(){
         String hotel1 = "LakeWood";
         String hotel2 = "BridgeWood";
@@ -22,6 +28,22 @@ public class HotelReservation {
 
     public ArrayList<Hotel> getHotelList(){
         return hotelList;
+    }
+    
+    //To count number of days from the given range of date.
+    public int countNoOfDays(String firstDate,String lastDate) {
+        LocalDate startDate = LocalDate.parse(firstDate);
+        LocalDate endDate = LocalDate.parse(lastDate);
+        return  (int) ChronoUnit.DAYS.between(startDate,endDate);
+    }
+
+    //To get the cheapest hotel.
+    public Hotel getCheapestHotel(int countNoOfDays){
+        hotelList.stream().map(p -> {p.setRate(countNoOfDays); return p.getRate(); }).collect(Collectors.toList());
+        Hotel minRate = hotelList.stream()
+                .min(Comparator.comparing(Hotel::getWeekDayRates))
+                .orElseThrow(NoSuchElementException::new);
+        return minRate;
     }
 
     public static void main(String[] args) {

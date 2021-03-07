@@ -18,4 +18,20 @@ public class HotelReservationTest<result> {
           System.out.println(hotelList);
           Assertions.assertTrue(hotelList.contains(hotel));
       }
+
+      @Test
+      public void givenHotels_shouldReturnCheapestHotel(){
+          HotelReservation hotelReservation = new HotelReservation();
+          Hotel Lakewood = new Hotel("Lakewood",110);
+          Hotel Bridgewood = new Hotel("Bridgewood",160);
+          Hotel RidgeWood = new Hotel("Ridgewood",220);
+          hotelReservation.addHotel(Lakewood);
+          hotelReservation.addHotel(Bridgewood);
+          hotelReservation.addHotel(RidgeWood);
+          List hotelList = hotelReservation.getHotelList();
+          System.out.println(hotelList);
+          int days = hotelReservation.countNoOfDays("2020-09-10","2020-09-12");
+          Hotel result = hotelReservation.getCheapestHotel(days);
+          Assertions.assertTrue(hotelList.contains(result));
+      }
 }
