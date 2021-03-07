@@ -12,7 +12,7 @@ public class HotelReservationTest<result> {
       @Test
       public void givenHotel_ShouldReturnTrue() {
           HotelReservation hotelReservation = new HotelReservation();
-          Hotel hotel = new Hotel("Lakewood",110);
+          Hotel hotel = new Hotel("Lakewood",110,90);
           hotelReservation.addHotel(hotel);
           List hotelList = hotelReservation.getHotelList();
           System.out.println(hotelList);
@@ -22,9 +22,9 @@ public class HotelReservationTest<result> {
       @Test
       public void givenHotels_shouldReturnCheapestHotel(){
           HotelReservation hotelReservation = new HotelReservation();
-          Hotel Lakewood = new Hotel("Lakewood",110);
-          Hotel Bridgewood = new Hotel("Bridgewood",160);
-          Hotel RidgeWood = new Hotel("Ridgewood",220);
+          Hotel Lakewood = new Hotel("Lakewood",110,90);
+          Hotel Bridgewood = new Hotel("Bridgewood",160,50);
+          Hotel RidgeWood = new Hotel("Ridgewood",220,150);
           hotelReservation.addHotel(Lakewood);
           hotelReservation.addHotel(Bridgewood);
           hotelReservation.addHotel(RidgeWood);

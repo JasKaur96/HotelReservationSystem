@@ -17,19 +17,22 @@ public class HotelReservation {
     }
 
     public void getHotelDetails(){
-        String hotel1 = "LakeWood";
-        String hotel2 = "BridgeWood";
-        String hotel3 = "RidgeWood";
-        List LakeWoodRate = Arrays.asList(110,80);
-        List BridgeWoodRate = Arrays.asList(160,110);
-        List RidgeWoodRate = Arrays.asList(220,100);
-
+        Hotel hotel1 = new Hotel("LakeWood", 110, 90);
+        Hotel  hotel2 = new Hotel("BridgeWood", 150, 50);
+        Hotel  hotel3 = new Hotel("RidgeWood" , 220, 150);
+        hotelList.add(hotel1);
+        hotelList.add(hotel2);
+        hotelList.add(hotel3);
     }
 
-    public ArrayList<Hotel> getHotelList(){
+    public ArrayList<Hotel> getHotelList() {
         return hotelList;
     }
-    
+
+    public void setHotelList(ArrayList<Hotel> hotelList) {
+        this.hotelList = hotelList;
+    }
+
     //To count number of days from the given range of date.
     public int countNoOfDays(String firstDate,String lastDate) {
         LocalDate startDate = LocalDate.parse(firstDate);

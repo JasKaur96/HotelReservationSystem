@@ -10,7 +10,7 @@ public class Hotel {
     public int rates;
     public Scanner sc = new Scanner(System.in);
 
-    public Hotel(String hotelName, int weekDayRates) {
+    public Hotel(String hotelName, int weekDayRates, int weekEndRates) {
         this.hotelName = hotelName;
         this.weekDayRates = weekDayRates;
     }
