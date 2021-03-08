@@ -95,6 +95,16 @@ public class HotelReservation {
         return minRate;
     }
 
+    public Hotel getBestCheapHotel(String date1, String date2){
+        Hotel minRate = getCheapestHotel(date1,date2);
+        int cheapestRate = minRate.getRate();
+        Predicate<Hotel> minPrice = rate -> rate.getRate()==cheapestRate;
+        List<Hotel> minPriceHotel = hotelList.stream().
+                filter(minPrice).collect(Collectors.toList());
+        Hotel maxRatings = minPriceHotel.stream().max(Comparator.comparing(Hotel::getRatings))
+                .orElseThrow(NoSuchElementException::new);
+        return maxRatings;
+    }
     public static void main(String[] args) {
         System.out.println("*****Welcome to the Hotel Reservation.*****");
         HotelReservation hotelReservation = new HotelReservation();
