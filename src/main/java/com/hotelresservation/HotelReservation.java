@@ -1,15 +1,16 @@
 package com.hotelresservation;
 
-import java.time.DateTimeException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class HotelReservation {
     public static Scanner sc = new Scanner(System.in);
     private ArrayList<Hotel> hotelList = new ArrayList<Hotel>();
+    static long totalDays,totalWeekDays,totalWeekEndDays;
 
     //Adding hotel.
     public void addHotel(Hotel hotel){
@@ -34,15 +35,62 @@ public class HotelReservation {
     }
 
     //To count number of days from the given range of date.
-    public int countNoOfDays(String firstDate,String lastDate) {
-        LocalDate startDate = LocalDate.parse(firstDate);
-        LocalDate endDate = LocalDate.parse(lastDate);
-        return  (int) ChronoUnit.DAYS.between(startDate,endDate);
+    public long noOfWeekDays(String date1, String date2) {
+        LocalDate startDate = LocalDate.parse(date1);
+        LocalDate endDate = LocalDate.parse(date2);
+        DayOfWeek start = startDate.getDayOfWeek();
+        DayOfWeek end = endDate.getDayOfWeek();
+        totalDays = ChronoUnit.DAYS.between(startDate, endDate);
+//        totalWeekDays = totalDays - 2 * ((totalDays + start.getValue())/7);
+//        totalWeekDays += (start == DayOfWeek.SUNDAY ? 1 : 0) + (end == DayOfWeek.SUNDAY ? 1 : 0);
+        totalDays = totalDays + 1;
+        totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
+        totalWeekDays = totalDays - totalWeekEndDays;
+        System.out.println(totalWeekDays);
+        return totalWeekDays;
+    }
+
+    public long noOfWeekEnds(String date1, String date2) {
+        LocalDate startDate = LocalDate.parse(date1);
+        LocalDate endDate = LocalDate.parse(date2);
+        long weekEndDays = 0;
+        LocalDate next = startDate.minusDays(1);
+        //iterate from start date to end date
+        while ((next = next.plusDays(1)).isBefore(endDate.plusDays(1))) {
+            if(next.getDayOfWeek().toString().equals("SATURDAY") || next.getDayOfWeek().toString().equals("SUNDAY")) {
+                totalWeekEndDays++;
+            }
+        }
+        return (int)totalWeekEndDays;
+//        totalDays = ChronoUnit.DAYS.between(startDate, endDate);
+//        totalDays = totalDays + 1;
+//        totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
+//        totalWeekDays = totalDays - totalWeekEndDays;
+//        System.out.println(totalWeekDays);
+//        return totalWeekDays;
+    }
+
+    public int getTotalWeekEndDays(LocalDate start, LocalDate end) {
+        long weekEndDays = 0;
+        LocalDate next = start.minusDays(1);
+        //iterate from start date to end date
+        long totalWeekEndDays = 0;
+        while ((next = next.plusDays(1)).isBefore(end.plusDays(1))) {
+            if(next.getDayOfWeek().toString().equals("SATURDAY") || next.getDayOfWeek().toString().equals("SUNDAY")) {
+                totalWeekEndDays++;
+            }
+        }
+        return (int)totalWeekEndDays;
     }
 
     //To get the cheapest hotel.
-    public Hotel getCheapestHotel(int countNoOfDays){
-        hotelList.stream().map(p -> {p.setRate(countNoOfDays); return p.getRate(); }).collect(Collectors.toList());
+    public Hotel getCheapestHotel(String date1, String date2){
+        totalWeekDays = noOfWeekDays(date1,date2);
+        totalWeekEndDays = noOfWeekDays(date1,date2);
+        hotelList.stream().map(r -> {
+            r.setRate(totalWeekDays,totalWeekEndDays);
+            return r.getRate();
+        }).collect(Collectors.toList());
         Hotel minRate = hotelList.stream()
                 .min(Comparator.comparing(Hotel::getWeekDayRates))
                 .orElseThrow(NoSuchElementException::new);

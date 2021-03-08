@@ -1,6 +1,5 @@
 package com.hotelresservation;
 
-import java.util.Date;
 import java.util.Scanner;
 
 public class Hotel {
@@ -39,10 +38,12 @@ public class Hotel {
     }
 
     public int getRate(){
-        return rates;
+        return weekDayRates + weekEndRates;
     }
-    public void setRate(int rates){
-        this.rates = rates;
+    public void setRate(int noOfWeekDays, int noOfWeekEnd){
+        this.weekDayRates = noOfWeekDays + noOfWeekEnd ;
+        this.weekEndRates = noOfWeekDays + noOfWeekEnd;
+        this.rates = weekDayRates + weekEndRates;
     }
 
     @Override
@@ -52,5 +53,8 @@ public class Hotel {
     }
 
     public void add(String lakeWood, int i) {
+    }
+
+    public void setRate(long totalWeekDays, long totalWeekEndDays) {
     }
 }

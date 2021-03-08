@@ -30,8 +30,40 @@ public class HotelReservationTest<result> {
           hotelReservation.addHotel(RidgeWood);
           List hotelList = hotelReservation.getHotelList();
           System.out.println(hotelList);
-          int days = hotelReservation.countNoOfDays("2020-09-10","2020-09-12");
-          Hotel result = hotelReservation.getCheapestHotel(days);
+          long days = hotelReservation.noOfWeekEnds("10-09-2021","12-09-2021");
+          Hotel result = hotelReservation.getCheapestHotel((int) days);
           Assertions.assertTrue(hotelList.contains(result));
       }
+
+    @Test
+    public void givenDateRange_shouldReturnCheapestHotel(){
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel Lakewood = new Hotel("Lakewood",110,90);
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50);
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150);
+        hotelReservation.addHotel(Lakewood);
+        hotelReservation.addHotel(Bridgewood);
+        hotelReservation.addHotel(RidgeWood);
+        List hotelList = hotelReservation.getHotelList();
+        System.out.println(hotelList);
+        long days = hotelReservation.noOfWeekDays("2020-09-10","2020-09-12");
+        Hotel result = hotelReservation.getCheapestHotel((int) days);
+        Assertions.assertTrue(hotelList.contains(result));
+    }
+
+    @Test
+    public void givenDateRange_basisOfWeekDayWeekEnd_shouldReturnCheapestHotel(){
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel Lakewood = new Hotel("Lakewood",110,90);
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50);
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150);
+        hotelReservation.addHotel(Lakewood);
+        hotelReservation.addHotel(Bridgewood);
+        hotelReservation.addHotel(RidgeWood);
+        List hotelList = hotelReservation.getHotelList();
+        Hotel result = hotelReservation.getCheapestHotel("2020-09-11","2020-09-12");
+        Assertions.assertTrue(hotelList.contains(result));
+    }
+
+    
 }
