@@ -17,13 +17,26 @@ public class HotelReservation {
         hotelList.add(hotel);
     }
 
-    public void getHotelDetails(){
-        Hotel hotel1 = new Hotel("LakeWood", 110, 90,3);
-        Hotel  hotel2 = new Hotel("BridgeWood", 150, 50,4);
-        Hotel  hotel3 = new Hotel("RidgeWood" , 220, 150,5);
-        hotelList.add(hotel1);
-        hotelList.add(hotel2);
-        hotelList.add(hotel3);
+    public void getHotelDetails(String customerType){
+
+            if(customerType.equals("Regular")){
+                Hotel hotel1 = new Hotel("LakeWood", 110, 90,3,"Regular");
+                Hotel  hotel2 = new Hotel("BridgeWood", 150, 50,4,"Regular");
+                Hotel  hotel3 = new Hotel("RidgeWood" , 220, 150,5,"Regular");
+                hotelList.add(hotel1);
+                hotelList.add(hotel2);
+                hotelList.add(hotel3);
+            }
+            else if(customerType.equals("Reward")){
+                Hotel hotel1 = new Hotel("LakeWood", 110, 90,3,"Reward");
+                Hotel  hotel2 = new Hotel("BridgeWood", 150, 50,4,"Reward");
+                Hotel  hotel3 = new Hotel("RidgeWood" , 220, 150,5,"Reward");
+                hotelList.add(hotel1);
+                hotelList.add(hotel2);
+                hotelList.add(hotel3);
+            }
+            else
+                System.out.println("Invalid Entry");
     }
 
     public ArrayList<Hotel> getHotelList() {
@@ -60,12 +73,6 @@ public class HotelReservation {
             }
         }
         return (int)totalWeekEndDays;
-//        totalDays = ChronoUnit.DAYS.between(startDate, endDate);
-//        totalDays = totalDays + 1;
-//        totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
-//        totalWeekDays = totalDays - totalWeekEndDays;
-//        System.out.println(totalWeekDays);
-//        return totalWeekDays;
     }
 
     public int getTotalWeekEndDays(LocalDate start, LocalDate end) {
@@ -114,6 +121,6 @@ public class HotelReservation {
     public static void main(String[] args) {
         System.out.println("*****Welcome to the Hotel Reservation.*****");
         HotelReservation hotelReservation = new HotelReservation();
-        hotelReservation.getHotelDetails();
+
     }
 }

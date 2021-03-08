@@ -8,9 +8,10 @@ public class Hotel {
     public int weekEndRates;
     public int rates;
     public int ratings;
+    public String customerType;
     public Scanner sc = new Scanner(System.in);
 
-    public Hotel(String hotelName, int weekDayRates, int weekEndRates, int ratings) {
+    public Hotel(String hotelName, int weekDayRates, int weekEndRates, int ratings,String customerType) {
         this.hotelName = hotelName;
         this.weekDayRates = weekDayRates;
     }

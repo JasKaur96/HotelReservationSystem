@@ -12,7 +12,7 @@ public class HotelReservationTest<result> {
       @Test
       public void givenHotel_ShouldReturnTrue() {
           HotelReservation hotelReservation = new HotelReservation();
-          Hotel hotel = new Hotel("Lakewood",110,90,3);
+          Hotel hotel = new Hotel("Lakewood",110,90,3,"Regular");
           hotelReservation.addHotel(hotel);
           List hotelList = hotelReservation.getHotelList();
           System.out.println(hotelList);
@@ -22,9 +22,9 @@ public class HotelReservationTest<result> {
       @Test
       public void givenHotels_shouldReturnCheapestHotel(){
           HotelReservation hotelReservation = new HotelReservation();
-          Hotel Lakewood = new Hotel("Lakewood",110,90,3);
-          Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
-          Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+          Hotel Lakewood = new Hotel("Lakewood",110,90,3,"Regular");
+          Hotel Bridgewood = new Hotel("Bridgewood",160,50,4,"Regular");
+          Hotel RidgeWood = new Hotel("Ridgewood",220,150,5,"Regular");
           hotelReservation.addHotel(Lakewood);
           hotelReservation.addHotel(Bridgewood);
           hotelReservation.addHotel(RidgeWood);
@@ -38,9 +38,9 @@ public class HotelReservationTest<result> {
     @Test
     public void givenDateRange_shouldReturnCheapestHotel(){
         HotelReservation hotelReservation = new HotelReservation();
-        Hotel Lakewood = new Hotel("Lakewood",110,90,3);
-        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
-        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+        Hotel Lakewood = new Hotel("Lakewood",110,90,3,"Regular");
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4,"Regular");
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5,"Regular");
         hotelReservation.addHotel(Lakewood);
         hotelReservation.addHotel(Bridgewood);
         hotelReservation.addHotel(RidgeWood);
@@ -53,9 +53,9 @@ public class HotelReservationTest<result> {
     @Test
     public void givenDateRange_basisOfWeekDayWeekEnd_shouldReturnCheapestHotel(){
         HotelReservation hotelReservation = new HotelReservation();
-        Hotel Lakewood = new Hotel("Lakewood",110,90,3);
-        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
-        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+        Hotel Lakewood = new Hotel("Lakewood",110,90,3,"Regular");
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4,"Regular");
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5,"Regular");
         hotelReservation.addHotel(Lakewood);
         hotelReservation.addHotel(Bridgewood);
         hotelReservation.addHotel(RidgeWood);
@@ -67,9 +67,9 @@ public class HotelReservationTest<result> {
     @Test
     public void givenDates_basisOfWeekDayWeekEnd_shouldReturnCheapestHotel(){
         HotelReservation hotelReservation = new HotelReservation();
-        Hotel Lakewood = new Hotel("Lakewood",110,90,3);
-        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
-        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+        Hotel Lakewood = new Hotel("Lakewood",110,90,3,"Regular");
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4,"Regular");
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5,"Regular");
         hotelReservation.addHotel(Lakewood);
         hotelReservation.addHotel(Bridgewood);
         hotelReservation.addHotel(RidgeWood);
@@ -81,9 +81,9 @@ public class HotelReservationTest<result> {
     @Test
     public void givenDates_basisOfWeekDayWeekEnd_shouldReturnBestCheapestHotel(){
         HotelReservation hotelReservation = new HotelReservation();
-        Hotel Lakewood = new Hotel("Lakewood",110,90,3);
-        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
-        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+        Hotel Lakewood = new Hotel("Lakewood",110,90,3,"Regular");
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4,"Regular");
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5,"Regular");
         hotelReservation.addHotel(Lakewood);
         hotelReservation.addHotel(Bridgewood);
         hotelReservation.addHotel(RidgeWood);
@@ -95,9 +95,9 @@ public class HotelReservationTest<result> {
     @Test
     public void givenDates_basisOfWeekDayWeekEnd_shouldReturnBestHotel(){
         HotelReservation hotelReservation = new HotelReservation();
-        Hotel Lakewood = new Hotel("Lakewood",110,90,3);
-        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
-        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+        Hotel Lakewood = new Hotel("Lakewood",110,90,3,"Regular");
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4,"Regular");
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5,"Regular");
         hotelReservation.addHotel(Lakewood);
         hotelReservation.addHotel(Bridgewood);
         hotelReservation.addHotel(RidgeWood);
@@ -106,5 +106,19 @@ public class HotelReservationTest<result> {
         Assertions.assertTrue(hotelList.contains(result));
     }
 
+
+    @Test
+    public void addSpecialRates_reward(){
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel Lakewood = new Hotel("Lakewood",80,80,3,"Reward");
+        Hotel Bridgewood = new Hotel("Bridgewood",110,50,4,"Reward");
+        Hotel RidgeWood = new Hotel("Ridgewood",100,40,5,"Reward");
+        hotelReservation.addHotel(Lakewood);
+        hotelReservation.addHotel(Bridgewood);
+        hotelReservation.addHotel(RidgeWood);
+        List hotelList = hotelReservation.getHotelList();
+        Hotel result = hotelReservation.getBestRatedHotel("2020-09-11","2020-09-12");
+        Assertions.assertTrue(hotelList.contains(result));
+    }
 
 }
