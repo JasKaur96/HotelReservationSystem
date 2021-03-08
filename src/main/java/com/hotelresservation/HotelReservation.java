@@ -31,9 +31,9 @@ public class HotelReservation {
     }
     
     //To count number of days from the given range of date.
-    public int countNoOfDays(String firstDate,String lastDate) {
-        LocalDate startDate = LocalDate.parse(firstDate);
-        LocalDate endDate = LocalDate.parse(lastDate);
+    public int countNoOfDays(String start,String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
         return  (int) ChronoUnit.DAYS.between(startDate,endDate);
     }
 
