@@ -78,5 +78,18 @@ public class HotelReservationTest<result> {
         Assertions.assertTrue(hotelList.contains(result));
     }
 
+    @Test
+    public void givenDates_basisOfWeekDayWeekEnd_shouldReturnBestCheapestHotel(){
+        HotelReservation hotelReservation = new HotelReservation();
+        Hotel Lakewood = new Hotel("Lakewood",110,90,3);
+        Hotel Bridgewood = new Hotel("Bridgewood",160,50,4);
+        Hotel RidgeWood = new Hotel("Ridgewood",220,150,5);
+        hotelReservation.addHotel(Lakewood);
+        hotelReservation.addHotel(Bridgewood);
+        hotelReservation.addHotel(RidgeWood);
+        List hotelList = hotelReservation.getHotelList();
+        Hotel result = hotelReservation.getBestCheapHotel("2020-09-11","2020-09-12");
+        Assertions.assertTrue(hotelList.contains(result));
+    }
 
 }
