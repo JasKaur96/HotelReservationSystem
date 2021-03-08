@@ -7,9 +7,10 @@ public class Hotel {
     public int weekDayRates;
     public int weekEndRates;
     public int rates;
+    public int ratings;
     public Scanner sc = new Scanner(System.in);
 
-    public Hotel(String hotelName, int weekDayRates, int weekEndRates) {
+    public Hotel(String hotelName, int weekDayRates, int weekEndRates, int ratings) {
         this.hotelName = hotelName;
         this.weekDayRates = weekDayRates;
     }
@@ -45,6 +46,7 @@ public class Hotel {
         this.weekEndRates = noOfWeekDays + noOfWeekEnd;
         this.rates = weekDayRates + weekEndRates;
     }
+
 
     @Override
     public String toString() {
