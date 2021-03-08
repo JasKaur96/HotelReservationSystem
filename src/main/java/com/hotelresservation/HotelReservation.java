@@ -34,15 +34,17 @@ public class HotelReservation {
     }
 
     //To count number of days from the given range of date.
-    public int countNoOfDays(String firstDate,String lastDate) {
+    public int noOfDays(String firstDate,String lastDate) {
         LocalDate startDate = LocalDate.parse(firstDate);
         LocalDate endDate = LocalDate.parse(lastDate);
         return  (int) ChronoUnit.DAYS.between(startDate,endDate);
     }
 
     //To get the cheapest hotel.
-    public Hotel getCheapestHotel(int countNoOfDays){
-        hotelList.stream().map(r -> {r.setRate(countNoOfDays); return r.getRate(); }).collect(Collectors.toList());
+    public Hotel getCheapestHotel(int noOfDays){
+        hotelList.stream().map(r -> {r.setRate(noOfDays);
+                                     return r.getRate();
+                                    }).collect(Collectors.toList());
         Hotel minRate = hotelList.stream()
                 .min(Comparator.comparing(Hotel::getWeekDayRates))
                 .orElseThrow(NoSuchElementException::new);
