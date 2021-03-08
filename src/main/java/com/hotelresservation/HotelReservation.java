@@ -41,8 +41,6 @@ public class HotelReservation {
         DayOfWeek start = startDate.getDayOfWeek();
         DayOfWeek end = endDate.getDayOfWeek();
         totalDays = ChronoUnit.DAYS.between(startDate, endDate);
-//        totalWeekDays = totalDays - 2 * ((totalDays + start.getValue())/7);
-//        totalWeekDays += (start == DayOfWeek.SUNDAY ? 1 : 0) + (end == DayOfWeek.SUNDAY ? 1 : 0);
         totalDays = totalDays + 1;
         totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
         totalWeekDays = totalDays - totalWeekEndDays;
@@ -62,14 +60,9 @@ public class HotelReservation {
             }
         }
         return (int)totalWeekEndDays;
-//        totalDays = ChronoUnit.DAYS.between(startDate, endDate);
-//        totalDays = totalDays + 1;
-//        totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
-//        totalWeekDays = totalDays - totalWeekEndDays;
-//        System.out.println(totalWeekDays);
-//        return totalWeekDays;
     }
 
+    //get noOfWeekEnd.
     public int getTotalWeekEndDays(LocalDate start, LocalDate end) {
         long weekEndDays = 0;
         LocalDate next = start.minusDays(1);
@@ -86,7 +79,7 @@ public class HotelReservation {
     //To get the cheapest hotel.
     public Hotel getCheapestHotel(String date1, String date2){
         totalWeekDays = noOfWeekDays(date1,date2);
-        totalWeekEndDays = noOfWeekDays(date1,date2);
+        totalWeekEndDays = noOfWeekEnds(date1,date2);(date1,date2);
         hotelList.stream().map(r -> {
             r.setRate(totalWeekDays,totalWeekEndDays);
             return r.getRate();
