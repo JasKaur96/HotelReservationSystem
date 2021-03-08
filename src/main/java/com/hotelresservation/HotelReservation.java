@@ -42,7 +42,7 @@ public class HotelReservation {
 
     //To get the cheapest hotel.
     public Hotel getCheapestHotel(int countNoOfDays){
-        hotelList.stream().map(p -> {p.setRate(countNoOfDays); return p.getRate(); }).collect(Collectors.toList());
+        hotelList.stream().map(r -> {r.setRate(countNoOfDays); return r.getRate(); }).collect(Collectors.toList());
         Hotel minRate = hotelList.stream()
                 .min(Comparator.comparing(Hotel::getWeekDayRates))
                 .orElseThrow(NoSuchElementException::new);
