@@ -30,7 +30,7 @@ public class HotelReservationTest<result> {
           hotelReservation.addHotel(RidgeWood);
           List hotelList = hotelReservation.getHotelList();
           System.out.println(hotelList);
-          int days = hotelReservation.countNoOfDays("2020-09-10","2020-09-12");
+          int days = hotelReservation.noOfDays("2020-09-10","2020-09-12");
           Hotel result = hotelReservation.getCheapestHotel(days);
           Assertions.assertTrue(hotelList.contains(result));
       }
