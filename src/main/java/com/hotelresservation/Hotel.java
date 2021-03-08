@@ -6,9 +6,9 @@ public class Hotel {
     public String hotelName;
     public int weekDayRates;
     public int weekEndRates;
-    public int rates, rewardRates;
+    public int rates, rewardRates,regularRates;
     public int ratings;
-    public long rewardWeekDayRates, rewardWeekEndRates;
+    public long rewardWeekDayRates, rewardWeekEndRates,regularWeekDayRates,regularWeekEndRates;
     public String customerType;
     public Scanner sc = new Scanner(System.in);
 
@@ -17,6 +17,8 @@ public class Hotel {
         this.weekDayRates = weekDayRates;
         this.rewardWeekDayRates = rewardWeekDayRates;
         this.rewardWeekEndRates = rewardWeekEndRates;
+        this.regularWeekDayRates = regularWeekDayRates;
+        this.regularWeekEndRates = regularWeekEndRates;
         this.ratings = ratings;
     }
 
@@ -35,11 +37,11 @@ public class Hotel {
     public void setWeekDayRates(int weekDayRates){
         this.weekDayRates = weekDayRates;
     }
-    public int getWeekEndRatesDayRates(){
+    public int getWeekEndRates(){
         return weekEndRates;
     }
 
-    public void setWeekEndRatesDayRates(int weekEndRates){
+    public void setWeekEndRates(int weekEndRates){
         this.weekEndRates = weekEndRates;
     }
 
@@ -60,13 +62,23 @@ public class Hotel {
     public int getRewardRates(){
         return rewardRates;
     }
+
+    public void setRegularRates(long noOfWeekDays, long noOfWeekEnd) {
+        this.regularWeekDayRates = regularWeekDayRates * noOfWeekDays ;
+        this.rewardWeekEndRates = regularWeekEndRates * noOfWeekEnd;
+        this.rewardRates = (int) (regularWeekDayRates + regularWeekEndRates);
+    }
+    public int getRegularRates(){
+        return regularRates;
+    }
+
     public int getRatings() {
         return ratings;
     }
 
     @Override
     public String toString() {
-        String hotel = "Hotel : " + this.getHotelName() +"\nWeekDayRate : " +this.getWeekDayRates()+"\nWeekEndRate : " +this.getWeekEndRatesDayRates();
+        String hotel = "Hotel : " + this.getHotelName() +"\nWeekDayRate : " +this.getWeekDayRates()+"\nWeekEndRate : " +this.getWeekEndRates();
         return hotel;
     }
 
