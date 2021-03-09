@@ -1,5 +1,6 @@
 package com.hotelresservation;
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -37,34 +38,44 @@ public class HotelReservation {
 
     //To count number of days from the given range of date.
     public long noOfWeekDays(String date1, String date2) {
-        LocalDate startDate = LocalDate.parse(date1);
-        LocalDate endDate = LocalDate.parse(date2);
-        DayOfWeek start = startDate.getDayOfWeek();
-        DayOfWeek end = endDate.getDayOfWeek();
-        totalDays = ChronoUnit.DAYS.between(startDate, endDate);
-        totalDays = totalDays + 1;
-        totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
-        totalWeekDays = totalDays - totalWeekEndDays;
-        System.out.println(totalWeekDays);
+        try {
+            LocalDate startDate = LocalDate.parse(date1);
+            LocalDate endDate = LocalDate.parse(date2);
+            DayOfWeek start = startDate.getDayOfWeek();
+            DayOfWeek end = endDate.getDayOfWeek();
+            totalDays = ChronoUnit.DAYS.between(startDate, endDate);
+            totalDays = totalDays + 1;
+            totalWeekEndDays = getTotalWeekEndDays(startDate, endDate);
+            totalWeekDays = totalDays - totalWeekEndDays;
+            System.out.println(totalWeekDays);
+        } catch (DateTimeException e) {
+            System.out.println("Invalid Date Entry!");
+        }
         return totalWeekDays;
     }
 
     public long noOfWeekEnds(String date1, String date2) {
-        LocalDate startDate = LocalDate.parse(date1);
-        LocalDate endDate = LocalDate.parse(date2);
-        long weekEndDays = 0;
-        LocalDate next = startDate.minusDays(1);
-        //iterate from start date to end date
-        while ((next = next.plusDays(1)).isBefore(endDate.plusDays(1))) {
-            if(next.getDayOfWeek().toString().equals("SATURDAY") || next.getDayOfWeek().toString().equals("SUNDAY")) {
-                totalWeekEndDays++;
+        try {
+            LocalDate startDate = LocalDate.parse(date1);
+            LocalDate endDate = LocalDate.parse(date2);
+            long weekEndDays = 0;
+            LocalDate next = startDate.minusDays(1);
+            //iterate from start date to end date
+            while ((next = next.plusDays(1)).isBefore(endDate.plusDays(1))) {
+                if (next.getDayOfWeek().toString().equals("SATURDAY") || next.getDayOfWeek().toString().equals("SUNDAY")) {
+                    totalWeekEndDays++;
+                }
             }
         }
-        return (int)totalWeekEndDays;
+        catch(DateTimeException e){
+            System.out.println("Invalid Date Entry");
+            e.printStackTrace();
+        }
+        return (int) totalWeekEndDays;
     }
 
     public int getTotalWeekEndDays(LocalDate start, LocalDate end) {
-        long weekEndDays = 0;
+
         LocalDate next = start.minusDays(1);
         //iterate from start date to end date
         long totalWeekEndDays = 0;
@@ -106,7 +117,37 @@ public class HotelReservation {
                 .orElseThrow(NoSuchElementException::new);
         return maxRatings;
     }
-
+     public Hotel addHotel_CustomerType(String date1, String date2, String customerType){
+         try {
+             if(customerType.equals("Regular")) {
+                 Hotel minRate = getCheapestHotel(date1,date2);
+                 int cheapestRate = minRate.getRegularRates();
+                 Predicate<Hotel> minPrice = rate -> rate.getRegularRates()==cheapestRate;
+                 List<Hotel> minPriceHotel = hotelList.stream().
+                         filter(minPrice).collect(Collectors.toList());
+                 Hotel maxRatings = minPriceHotel.stream().max(Comparator.comparing(Hotel::getRatings))
+                         .orElseThrow(NoSuchElementException::new);
+                 return maxRatings;
+             }
+             else if(customerType.equals("Reward")){
+                 Hotel minRate = getCheapestHotel(date1,date2);
+                 int cheapestRate = minRate.getRewardRates();
+                 Predicate<Hotel> minPrice = rate -> rate.getRewardRates()==cheapestRate;
+                 List<Hotel> minPriceHotel = hotelList.stream().
+                         filter(minPrice).collect(Collectors.toList());
+                 Hotel maxRatings = minPriceHotel.stream().max(Comparator.comparing(Hotel::getRatings))
+                         .orElseThrow(NoSuchElementException::new);
+                 return maxRatings;
+             }
+             else {
+                 throw new InvalidEntryException("Invalid Customer Type");
+             }
+         }
+         catch(InvalidEntryException exception) {
+             System.out.println(exception);
+         }
+         return Hotel.maxRatings;
+     }
     public static void main(String[] args) {
         System.out.println("*****Welcome to the Hotel Reservation.*****");
         HotelReservation hotelReservation = new HotelReservation();

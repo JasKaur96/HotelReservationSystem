@@ -3,6 +3,7 @@ package com.hotelresservation;
 import java.util.Scanner;
 
 public class Hotel {
+    public static Hotel maxRatings;
     public String hotelName;
     public int weekDayRates;
     public int weekEndRates;
