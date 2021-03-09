@@ -101,7 +101,7 @@ public class HotelReservation {
         return minRate;
     }
     //Cheap best rated cheap hotel.
-    public Hotel getBestCheapHotel(String date1, String date2){
+    public Hotel getBestCheapHotel(String date1, String date2,String customerType){
         Hotel minRate = getCheapestHotel(date1,date2);
         int cheapestRate = minRate.getRewardRates();
         Predicate<Hotel> minPrice = rate -> rate.getRewardRates()==cheapestRate;

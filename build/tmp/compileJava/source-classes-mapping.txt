@@ -1,6 +1,6 @@
 com/hotelresservation/InvalidEntryException.java
  com.hotelresservation.InvalidEntryException
-com/hotelresservation/HotelReservation.java
- com.hotelresservation.HotelReservation
 com/hotelresservation/Hotel.java
  com.hotelresservation.Hotel
+com/hotelresservation/HotelReservation.java
+ com.hotelresservation.HotelReservation
